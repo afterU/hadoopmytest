@@ -29,11 +29,21 @@ public class MapReduceTemplate extends Configured implements Tool {
   public static class TemplateMapper extends Mapper<LongWritable, Text,Text, IntWritable> {
 
     @Override
+    protected void setup(Context context) throws IOException, InterruptedException {
+      //进行map操作之前的一些操作，例如读入数据
+      //TODO
+    }
+
+    @Override
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
       //ToDO 实现map逻辑
     }
 
+    @Override
+    protected void cleanup(Context context) throws IOException, InterruptedException {
+      //map操作之后的一些操作，释放资源
+    }
   }
 
   //step2: reduce
@@ -41,9 +51,20 @@ public class MapReduceTemplate extends Configured implements Tool {
   public static class TemplateReduce extends Reducer<Text,IntWritable,Text,IntWritable> {
 
     @Override
+    protected void setup(Context context) throws IOException, InterruptedException {
+      //reduce前的一些操作
+    }
+
+    @Override
     public void reduce(Text key, Iterable<IntWritable> values, Context context)
         throws IOException, InterruptedException {
       //TODO 实现reduce逻辑
+    }
+
+    @Override
+    protected void cleanup(Context context) throws IOException, InterruptedException {
+      //reduce之后的一些操作
+
     }
   }
 
